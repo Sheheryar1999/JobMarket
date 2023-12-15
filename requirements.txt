@@ -1,3 +1,11 @@
 ## Install Node LTS 20.10.0 https://nodejs.org/en
 ## Install Hardhat: npm install --save-dev hardhat
 ##          I used the Hardhat extention for VSCode
+
+## Metamask test password112
+
+
+##Sepolia testnet use faucet
+
+##adjust config file
+#npx hardhat --network sepolia PATH
