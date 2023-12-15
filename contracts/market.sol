@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract Market {
+contract FreelanceMarketplace {
     // State variables
     address public owner;
     enum JobStatus { Open, InProgress, Completed, Disputed, Closed }
@@ -117,5 +117,35 @@ contract Market {
         }
 
         return allJobs;
+    }
+
+    // Function to get all job details including status
+    function getAllJobDetails() public view returns (Job[] memory) {
+        Job[] memory jobDetails = new Job[](jobCounter);
+        for (uint256 i = 1; i <= jobCounter; i++) {
+            Job storage job = jobs[i];
+            jobDetails[i - 1] = job;
+        }
+        return jobDetails;
+    }
+
+    // Function to get job IDs for open jobs that can be accepted
+    function getOpenJobs() external view returns (uint256[] memory) {
+        uint256[] memory openJobIds = new uint256[](jobCounter);
+        uint256 openJobsCount = 0;
+
+        for (uint256 i = 1; i <= jobCounter; i++) {
+            if (jobs[i].status == JobStatus.Open) {
+                openJobIds[openJobsCount] = jobs[i].jobId;
+                openJobsCount++;
+            }
+        }
+
+        // Resize the array to exclude any unused elements
+        assembly {
+            mstore(openJobIds, openJobsCount)
+        }
+
+        return openJobIds;
     }
 }
