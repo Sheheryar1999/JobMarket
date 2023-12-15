@@ -9,3 +9,8 @@
 
 ##adjust config file
 #npx hardhat --network sepolia PATH
+
+
+##contract address 	0x72e706f47e8bafb76f085faf41f44b82361e82d5
+##npm install web3
+##npm install bootstrap
